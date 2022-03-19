@@ -34,7 +34,7 @@ Pour implémenter ces fonctionnalités, vous devez créer les pages suivantes :
 
 1. Clonez le dépot dans votre ordinateur :
 ```
-    git clone https://github.com/celestin211/SnowTricks.git
+    git clone https://github.com/celestin211/SnowTricks_OC.git
 ```
 
 2. Modifier le .env selon la base de données que vous avez l'habitude d'utiliser (MYSQL, postgresql, sqlite)
