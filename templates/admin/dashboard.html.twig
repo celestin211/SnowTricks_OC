@@ -1,0 +1,103 @@
+{% extends 'admin-base.html.twig' %}
+
+{% block subtitle %}Vue d'ensemble{% endblock %}
+{% block mainTitle %}Tableau de bord👷{% endblock %}
+
+{% block body %}
+    {% for trick in tricks %}
+        <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
+            <div class="card card-small card-post card-post--1">
+                <div class="card-post__image" style="background-image: url('/images/{{ trick.image }}');">
+                    <div class="card-post__author d-flex">
+                        <a href="{{ path('user_profile', { 'id' : trick.user.id }) }}" target="_blank" class="card-post__author-avatar card-post__author-avatar--small" style="background-image: url('/images/{{ trick.user.avatar }}');">Ecrit par {{ trick.user.username }}</a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <a class="text-fiord-blue" href="{{ path('trick_show', {'id': trick.id}) }}">{{ trick.title }}</a>
+                    </h5>
+                    <p class="card-text d-inline-block mb-3">{{ trick.lead }}</p><br>
+                    <span class="text-muted">{{ trick.createdAt | date('d/m/Y à H:i') }}) }}</span>
+                    <div class="blog-comments__actions mt-3">
+                        <div class="btn-group btn-group-sm">
+                            <button type="button" onclick="window.open('{{ path('trick_show', {'id': trick.id}) }}')" target="_blank" class="btn btn-white">
+                            <span class="text-success">
+                            <i class="material-icons">arrow_right_alt</i>
+                            </span> Consulter </button>
+                            <button type="button" style="font-size: 6px;" class="btn btn-white" data-toggle="modal" data-target="#deleteModal" data-href="{{ path('trick_admin_delete', {'id': trick.id}) }}">
+                            <span class="text-danger">
+                            <i class="material-icons">clear</i>
+                            </span> Supprimer </button>
+                            <button type="button" style="font-size: 6px;" onclick="window.location.href = '{{ path('trick_edit', {'id': trick.id}) }}';" class="btn btn-white">
+                            <span class="text-light">
+                            <i class="material-icons">more_vert</i>
+                            </span> Modifier </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+        <div class="col-lg-5 col-md-12 col-sm-12 mb-4">
+            <div class="card card-small blog-comments">
+                <div class="card-header border-bottom">
+                    <h6 class="m-0">Derniers commentaires</h6>
+                </div>
+                <div class="card-body p-0">
+                    {% for comment in comments %}
+                        <div class="blog-comments__item d-flex p-3">
+                            <div class="blog-comments__avatar mr-3">
+                                <img src="/images/{{ comment.user.avatar }}" alt="{{ comment.user.username }}" />
+                            </div>
+                            <div class="blog-comments__content">
+                                <div class="blog-comments__meta text-muted">
+                                    <a href="{{ path('user_profile', { 'id' : comment.user.id }) }}" target="_blank">{{ comment.user.username }}</a> dans
+                                    <a href="/trick/{{ comment.trick.id }}#{{ comment.id }}" target="_blank">{{ comment.trick.title }}</a>
+                                    <span class="text-muted">- il y a
+                                        {% set difference = date(comment.createdAt|date('Y/m/d')).diff(date('now'|date('Y/m/d'))) %}
+                                        {% set leftDays = difference.days %}
+                                        {% if leftDays == 1 %}
+                                            1 jour
+                                        {% elseif leftDays == 0 %}
+                                            moins de 24 heures
+                                        {% else %}
+                                            {{ leftDays }} jours
+                                        {% endif %}
+                                    </span>
+                                </div>
+                                {% set consult = " <a href=comment/edit/" ~ comment.id ~ ">...</a>" %}
+                                <p class="m-0 my-1 mb-2 text-muted text-justify">
+                                    {{ comment.content|length > 50 ? comment.content|slice(0, 50) : comment.content }}{{ comment.content|length > 50 ? consult|raw }}
+                                </p>
+                                <div class="blog-comments__actions">
+                                    <div class="btn-group btn-group-sm">
+                                        <button type="button" style="font-size:6px;"onclick="window.open('/trick/{{ comment.trick.id }}#{{ comment.id }}')" target="_blank" class="btn btn-white">
+                                        <span class="text-success">
+                                        <i class="material-icons">arrow_right_alt</i>
+                                        </span> Consulter </button>
+                                        <button type="button" style="font-size: 6px;"class="btn btn-white" data-toggle="modal" data-target="#deleteModal" data-href="{{ path('comment_admin_delete', {'id': comment.id}) }}">
+                                        <span class="text-danger">
+                                        <i class="material-icons">clear</i>
+                                        </span> Supprimer </button>
+                                        <button type="button" style="font-size: 6px;"onclick="window.location.href = '{{ path('comment_admin_update', {'id': comment.id}) }}';" class="btn btn-white">
+                                        <span class="text-light">
+                                        <i class="material-icons">more_vert</i>
+                                        </span> Modifier </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="card-footer border-top">
+                    <div class="row">
+                        <div class="col text-center view-report">
+                            <form action="{{ path('admin_comment') }}" method="post">
+                                <button type="submit" class="btn btn-white">Voir tous les commentaires</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+{% endblock %}
