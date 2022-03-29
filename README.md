@@ -14,6 +14,8 @@ Projet de la formation ***Développeur d'application - PHP / Symfony***.
 
 [![Codacy Badge]
 
+app.codacy.com/gh/celestin211/SnowTricks_OC/
+
 ## Descriptif du besoin
 
     Vous êtes chargé de développer le site répondant aux besoins de Jimmy.
