@@ -32,13 +32,14 @@ class HomeController extends AbstractController
         $tricks = $repo->findAll();
         return $this->render('home/index.html.twig', [
             'tricks' => $tricks,
+
         ]);
     }
 
     /**
      * Display the single trick page with trick data and the add comment form
      *
-     * @Route("/trick/{id}", name="trick_show")
+     * @Route("/trick/{slug}", name="trick_show")
      *
      * @param Trick $trick
      * @param ImageRepository $repo_image
@@ -60,11 +61,13 @@ class HomeController extends AbstractController
                 ->setUser($this->getUser());
             $manager->persist($comment);
             $manager->flush();
-            return $this->redirectToRoute('trick_show', ['id' => $trick->getId(), '_fragment' => $comment->getId()]);
+            return $this->redirectToRoute('trick_show', ['id' => $trick->getId(), '_fragment' => $comment->getId(),
+          'slug'=>$trick->getSlug()]);
+           $tricks = $repo->findBy([], ['createdAt' => 'DESC'], 15, 0);
         }
         $images = $repo_image->findBy(['trick' => $trick->getId()]);
         $videos = $repo_video->findBy(['trick' => $trick->getId()]);
-        $comments = $repo_comment->findBy(['trick' => $trick->getId()]);
+        $comments = $repo_comment->findBy(['trick' => $trick->getId()], ['createdAt' => 'DESC'], 4);
         return $this->render('home/show.html.twig', [
             'trick' => $trick,
             'images' => $images,
