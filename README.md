@@ -1,5 +1,8 @@
 #BOSONGO CELESTIN
 
+[SnowTricks]
+https://bosongoservices.com/#tricks
+
 Le deploiment de l'application
 
 Projet OpenClassrooms site communautaire SnowTricks
@@ -31,12 +34,21 @@ Pour implémenter ces fonctionnalités, vous devez créer les pages suivantes :
     la page de création d'une nouvelle figure ;
     la page de modification d'une figure ;
     la page de présentation d’une figure (contenant l’espace de discussion commun autour d’une figure).
+    
+#Outil uilisé
+    Composer
+    MysQl
+    Apache
+    Symfony 
+
+
 
 ## Installation
 
 1. Clonez le dépot dans votre ordinateur :
 ```
     git clone https://github.com/celestin211/SnowTricks_OC.git
+    
 ```
 
 2. Modifier le .env selon la base de données que vous avez l'habitude d'utiliser (MYSQL, postgresql, sqlite)
