@@ -42,4 +42,14 @@ class LoginController extends AbstractController
             'error' => $error ? $error->getMessage() : null,
         ]);
     }
+    /**
+       * Logout function
+       *
+       * @Route("/logout", name="account_logout")
+       *
+       * @return void
+       */
+      public function logout(): void
+      {
+      }
   }
