@@ -67,7 +67,7 @@ class HomeController extends AbstractController
         }
         $images = $repo_image->findBy(['trick' => $trick->getId()]);
         $videos = $repo_video->findBy(['trick' => $trick->getId()]);
-        $comments = $repo_comment->findBy(['trick' => $trick->getId()], ['createdAt' => 'DESC'], 4);
+        $comments = $repo_comment->findBy(['trick' => $trick->getId()], ['createdAt' => 'DESC']);
         return $this->render('home/show.html.twig', [
             'trick' => $trick,
             'images' => $images,
