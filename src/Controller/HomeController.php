@@ -11,69 +11,50 @@ use App\Repository\TrickRepository;
 use App\Repository\VideoRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Routing\Annotation\Route;
+
+
 
 class HomeController extends AbstractController
 {
-    /**
-     * Display the home page
-     *
-     * @Route("/", name="home")
-     *
-     * @param TrickRepository $repo
-     *
-     * @return Response
-     */
-
-    public function index(TrickRepository $repo): Response
+#[Route("/", name: "app_home", methods: ['GET'])]
+    public function index(): Response
     {
-        $tricks = $repo->findAll();
+
         return $this->render('home/index.html.twig', [
-            'tricks' => $tricks,
 
         ]);
     }
 
-    /**
-     * Display the single trick page with trick data and the add comment form
-     *
-     * @Route("/trick/{slug}", name="trick_show")
-     *
-     * @param Trick $trick
-     * @param ImageRepository $repo_image
-     * @param VideoRepository $repo_video
-     * @param CommentRepository $repo_comment
-     * @param Request $request
-     * @param EntityManagerInterface $manager
-     *
-     * @return Response
-     */
-    public function show(Trick $trick, ImageRepository $repo_image, VideoRepository $repo_video, CommentRepository $repo_comment, Request $request, EntityManagerInterface $manager): Response
+    #[Route('/about', name: 'app_about', methods: ['GET'])]
+    public function about(Request $request): Response
     {
-        $comment = new Comment();
-        $form = $this->createForm(CommentType::class, $comment);
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $comment->setCreatedAt(new \DateTime())
-                ->setTrick($trick)
-                ->setUser($this->getUser());
-            $manager->persist($comment);
-            $manager->flush();
-            return $this->redirectToRoute('trick_show', ['id' => $trick->getId(), '_fragment' => $comment->getId(),
-          'slug'=>$trick->getSlug()]);
-           $tricks = $repo->findBy([], ['createdAt' => 'DESC'], 15, 0);
-        }
-        $images = $repo_image->findBy(['trick' => $trick->getId()]);
-        $videos = $repo_video->findBy(['trick' => $trick->getId()]);
-        $comments = $repo_comment->findBy(['trick' => $trick->getId()], ['createdAt' => 'DESC']);
-        return $this->render('home/show.html.twig', [
-            'trick' => $trick,
-            'images' => $images,
-            'videos' => $videos,
-            'comments' => $comments,
-            'form' => $form->createView(),
-        ]);
+        return $this->render('about/index.html.twig');
     }
+    #[Route(path: '/rgaa', name: 'toggle_rgaa', methods: ['GET'])]
+    public function mode(Request $request): JsonResponse
+    {
+        if ($request->isXmlHttpRequest()) {
+            /* @var $session Session */
+            $session = $request->getSession();
+            $status = $session->get('rgaaActif', false);
+            $session->set('rgaaActif', !$status);
+
+            return new JsonResponse(['status' => 'ok']);
+        }
+
+        return new JsonResponse(['status' => 'ko'], 404);
+    }
+
+    #[Route(path: '/_rgaa', name: 'rgaa', methods: ['GET'])]
+    public function rgaa(): Response
+    {
+        return $this->render('rgaa.html.twig');
+    }
+
+
 }

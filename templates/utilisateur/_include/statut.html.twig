@@ -1,0 +1,10 @@
+{% if statut == 'Inactif' %}
+    <span class="label label-danger">Inactif</span>
+{% elseif statut == 'Bloqué' %}
+    <span class="label label-warning">Bloqué</span>
+    <a href="" data-toggle="modal" data-target="#myModal_unlock_{{ utilisateur.id }}" title="Débloquer l'utilisateur">
+        <i class="fa fa-unlock"></i>
+    </a>
+{% else %}
+    <span class="label label-success">Actif</span>
+{% endif %}

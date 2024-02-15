@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+
+    {% import _self as modals %}
+
+    {% block frameTitle %}Liste des utilisateurs{% endblock frameTitle %}
+
+    {% block pageTitle %}<i class="fa fa-user"></i> Liste des utilisateurs{% endblock pageTitle %}
+
+
+    {% block content %}
+
+        <div class="container-fluid py-4">
+            <div class="row mt-4">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="table-responsive">
+                            <div class="dataTable-wrapper dataTable-loading no-footer sortable searchable fixed-height fixed-columns">
+                                <div class="dataTable-top">
+                                    <div class="dataTable-dropdown"><label>
+                                            <select class="dataTable-selector">
+                                                <option value="5">5</option><option value="10" selected="">10</option><option value="15">15</option><option value="20">20</option><option value="25">25</option>
+                                            </select> entries per page</label></div><div class="dataTable-search">
+                                        <input class="dataTable-input" placeholder="Search..." type="text"></div></div>
+                                <div class="dataTable-container" style="height: 500.633px;">
+                                    <table class="table table-striped " id="listeUtilisateurs">
+                                        <thead class="thead-light">
+                                        <tr>
+                                            <th scope="col" class="text-center">Civilité</th>
+                                            <th scope="col">Nom</th>
+                                            <th scope="col">Prénom</th>
+                                            <th scope="col">Courriel</th>
+                                            <th scope="col">Rôles</th>
+                                            <th scope="col" class="mw-10">Statut</th>
+                                            <th scope="col" class="mw-100">Actions</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        {% block javascripts  %}
+            {{ parent() }}
+            {{ encore_entry_script_tags('utilisateur.index') }}
+        {% endblock %}
+    {% endblock content %}
+

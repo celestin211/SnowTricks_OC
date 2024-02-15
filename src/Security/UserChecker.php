@@ -2,41 +2,32 @@
 
 namespace App\Security;
 
-use App\Entity\User;
-use App\Exception\AccountUnconfirmedException;
+use App\Entity\Utilisateur;
+use Symfony\Component\Security\Core\Exception\CustomUserMessageAccountStatusException;
 use Symfony\Component\Security\Core\User\UserCheckerInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-/**
- * UserChecker checks the user account flags.
- *
- * @author Célestin BOSONGO
- */
 class UserChecker implements UserCheckerInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function checkPreAuth(UserInterface $user): void
-    {}
-
-    /**
-     * Checking if user is confirmed
-     *
-     * @param UserInterface $user
-     *
-     * @return void
-     *
-     * @throws AccountUnconfirmedException
-     */
-    public function checkPostAuth(UserInterface $user): void
     {
-        if (!$user instanceof User) {
+        if (!$user instanceof Utilisateur) {
             return;
         }
 
-        if (!$user->getConfirmed()) {
-            throw new AccountUnconfirmedException('Vous devez valider votre compte avant de pouvoir vous connecter.');
+        if (!$user->isEnabled()) {
+            throw new CustomUserMessageAccountStatusException('Votre compte utilisateur est désactivé.');
+        }
+
+        if ($user->isLocked()) {
+            throw new CustomUserMessageAccountStatusException("Compte bloqué : veuillez utiliser la fonctionnalité 'Mot de passé oublié'");
+        }
+    }
+
+    public function checkPostAuth(UserInterface $user): void
+    {
+        if (!$user instanceof Utilisateur) {
+            return;
         }
     }
 }

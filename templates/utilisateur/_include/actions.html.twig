@@ -1,0 +1,148 @@
+<a href="{{ path('utilisateur_edit', { 'id': utilisateur.id }) }}" title="Modifier l'utilisateur">
+    <i class="fa fa-edit"></i>
+</a>
+{% if utilisateur.id != app.user.id %}
+    {% if utilisateur.isEnabled() == false %}
+        <a href="" data-toggle="modal" data-target="#myModal_enable_{{ utilisateur.id }}" title="Activer l'utilisateur">
+            <i class="fa fa-recycle"></i>
+        </a>
+    {% else %}
+        <a href="" data-toggle="modal" data-target="#myModal_disable_{{ utilisateur.id }}" title="Désactiver l'utilisateur">
+            <i class="fa fa-lock"></i>
+        </a>
+    {% endif %}
+{% endif %}
+<a href="{{ path('utilisateur_show', { 'id': utilisateur.id }) }}" title="Détails de l'utilisateur">
+    <i class="fa fa-search"></i>
+</a>
+
+<a href="{{ path('utilisateur_activer_redefinir_password', { 'id': utilisateur.id }) }}" title="Activer et redéfinir le mot de passe">
+    <i class="fa fa-life-ring"></i>
+</a>
+
+<a href="" data-toggle="modal" data-target="#myModal_delete_{{ utilisateur.id }}" title="Supprimer l'utilisateur">
+    <i class="fa fa-user-times"></i>
+</a>
+
+{% if utilisateur.isEnabled() %}
+    <!-- Modal -->
+    <div class="modal fade modal-danger" id="myModal_disable_{{ utilisateur.id }}" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Désactiver l'utilisateur</h4>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        Etes-vous sûr de vouloir désactiver l'utilisateur suivant :
+                        "{{ utilisateur.nom | upper }} {{ utilisateur.prenom |title }}" ?
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <form action="{{ path('utilisateur_disable', { 'id': utilisateur.id }) }}" method="post">
+                        <input type="hidden" name="_method" value="PUT"/>
+                        {{ form_rest(disableForm) }} {# Protection CSRF active #}
+                        <button type="submit" class="btn btn-default pull-left" onclick="$('#myModal_{{ utilisateur.id }}').modal('hide');">
+                            Oui
+                        </button>
+                    </form>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% else %}
+    <!-- Modal -->
+    <div class="modal fade modal-danger" id="myModal_enable_{{ utilisateur.id }}" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Activer l'utilisateur</h4>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        Etes-vous sûr de vouloir activer l'utilisateur suivant :
+                        "{{ utilisateur.nom | upper }} {{ utilisateur.prenom |title }}" ?
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <form action="{{ path('utilisateur_enable', { 'id': utilisateur.id }) }}" method="post">
+                        <input type="hidden" name="_method" value="PUT"/>
+                        {{ form_rest(enableForm) }} {# Protection CSRF active #}
+                        <button type="submit" class="btn btn-default pull-left" onclick="$('#myModal_{{ utilisateur.id }}').modal('hide');">
+                            Oui
+                        </button>
+                    </form>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endif %}
+
+{% if utilisateur.isLocked() %}
+    <div class="modal fade modal-warning" id="myModal_unlock_{{ utilisateur.id }}" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Débloquer l'utilisateur</h4>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        Etes-vous sûr de vouloir débloquer l'utilisateur suivant :
+                        "{{ utilisateur.nom | upper }} {{ utilisateur.prenom |title }}" ?
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <form action="{{ path('utilisateur_unlock', { 'id': utilisateur.id }) }}" method="post">
+                        <input type="hidden" name="_method" value="PUT"/>
+                        {{ form_rest(unlockForm) }} {# Protection CSRF active #}
+                        <button type="submit" class="btn btn-default pull-left" onclick="$('#myModal_unlock_{{ utilisateur.id }}').modal('hide');">
+                            Oui
+                        </button>
+                    </form>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endif %}
+
+    {# Modal: supprimer un utilisateur	#}
+<div class="modal fade modal-danger" id="myModal_delete_{{ utilisateur.id }}" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Supprimer l'utilisateur</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    Etes-vous sûr de vouloir <strong>supprimer</strong> l'utilisateur :
+                    <strong>"{{ utilisateur.nom | upper }} {{ utilisateur.prenom |title }}"</strong> ?<br/><br/>
+                </p>
+            </div>
+            <div class="modal-footer">
+                <form action="{{ path('utilisateur_delete', { 'id': utilisateur.id }) }}" method="post">
+                    <input type="hidden" name="_method" value="DELETE"/>
+                    {{ form_rest(deleteForm) }} {# Protection CSRF active #}
+                    <button type="submit" class="btn btn-default pull-left" onclick="$('#myModal_delete_{{ utilisateur.id }}').modal('hide');">
+                        Oui
+                    </button>
+                </form>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+            </div>
+        </div>
+    </div>
+</div>

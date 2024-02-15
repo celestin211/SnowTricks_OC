@@ -1,0 +1,23 @@
+# This file is auto-generated during the composer install
+parameters:
+  locale: fr
+  mailer.reply_address: ne-pas-repondre@goldy.fr
+  kernel.root_dir: '%kernel.project_dir%'
+  mailer.from_address: ne-pas-repondre@SCHOOL.fr
+  mailer.from_name: Adminstrateur SCHOOL
+  # Durée en secondes pendant laquelle le navigateur garde la session si la case "Se souvenir de moi" a été cochée par l'utilisateur
+  # 2592000 = 30 jours en secondes (garde la session ouverte meme après fermeture du navigateur)
+  bac.company_name: 'GOLDY'
+  bac.app_name: 'GOLDY'
+  app.environnement: '%env(APP_ENVIRONNEMENT)%'
+  bac.app_version: 3.0.3
+  bac.docs.tmpDir: '%kernel.project_dir%/public/uploads/data/tmp/'
+  bac.campagne.delaisRappel : 5
+  bac.maquette.nbLignesMax: 10000
+  app.autocomplete: '%env(APP_AUTOCOMPLETE)%'
+  bac.absolute_url : '%env(APP_ABSOLUTE_URL)%'
+  bac.errors.subject: 'SCHOOL : erreur sur %env(APP_ENVIRONNEMENT)% '
+  bac.twilio_account_sid: '%env(TWILIO_ACCOUNT_SID)%'
+  bac.twilio_api_key_sid: '%env(TWILIO_API_KEY_SID)%'
+  bac.twilio_api_key_secret:  '%env(TWILIO_API_KEY_SECRET)%'
+

@@ -2,16 +2,7 @@
 
 namespace App\Controller;
 
-use App\Entity\PasswordForgot;
-use App\Entity\PasswordReset;
-use App\Entity\PasswordUpdate;
-use App\Entity\User;
-use App\Form\AccountType;
-use App\Form\PasswordForgotType;
-use App\Form\PasswordResetType;
-use App\Form\PasswordUpdateType;
-use App\Form\RegistrationType;
-use App\Repository\UserRepository;
+
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -37,7 +28,7 @@ class LoginController extends AbstractController
     {
         $error = $utils->getLastAuthenticationError();
         $username = $utils->getLastUsername();
-        return $this->render('account/login.html.twig', [
+        return $this->render('security/login.html.twig', [
             'username' => $username,
             'error' => $error ? $error->getMessage() : null,
         ]);
