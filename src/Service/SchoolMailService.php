@@ -81,7 +81,7 @@ class SchoolMailService
         $subject = 'SIGNAC : Campagne "'.$campagne->getTypeCampagneImpressionLong().'" : Clôturée';
         $template = 'Mail/Campagne/CLOTUREE/notification_min.html.twig';
 
-        $utilisateurs = $this->utilisateurRepository->findUtilisateurs(['ROLE_DGAFP', 'ROLE_MIN', 'ROLE_MIN_VAL']);
+        $utilisateurs = $this->utilisateurRepository->findUtilisateurs(['ROLE_MIN', 'ROLE_MIN_VAL']);
 
         // Envoyer une notification aux utilisateurs actifs qui ne sont pas Admin ni acteur
         /** @var Utilisateur $utilisateur */
@@ -151,7 +151,7 @@ class SchoolMailService
         $subject = 'SIGNAC : Campagne "'.$campagne->getTypeCampagneImpressionLong().'" : Suppression';
         $template = 'Mail/Campagne/SUPPRIMEE/suppression.html.twig';
 
-        $utilisateurs = $this->utilisateurRepository->findUtilisateurs(['ROLE_DGAFP', 'ROLE_MIN', 'ROLE_MIN_VAL']);
+        $utilisateurs = $this->utilisateurRepository->findUtilisateurs(['ROLE_MIN', 'ROLE_MIN_VAL']);
 
         // Envoyer une notification aux utilisateurs actifs qui ne sont pas Admin ni acteur
         /** @var Utilisateur $utilisateur */
@@ -525,6 +525,7 @@ class SchoolMailService
             null,
             'Confirmation de création de compte',
             'email/confirmation_registration.email.twig',
+            
             [
                 'confirmationToken' => $utilisateur->getConfirmationToken(),
             ]
@@ -681,7 +682,7 @@ class SchoolMailService
 
     private function notifierActifsSaufAdminEtActeur(Campagne $campagne, Utilisateur $acteur, string $subject, string $template)
     {
-        $utilisateurs = $this->utilisateurRepository->findUtilisateurs(['ROLE_DGAFP', 'ROLE_MIN', 'ROLE_MIN_VAL']);
+        $utilisateurs = $this->utilisateurRepository->findUtilisateurs(['ROLE_MIN', 'ROLE_MIN_VAL']);
 
         // Envoyer une notification aux utilisateurs actifs qui ne sont pas Admin ni acteur
         /** @var Utilisateur $utilisateur */
