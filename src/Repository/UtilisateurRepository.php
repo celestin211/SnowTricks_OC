@@ -72,7 +72,7 @@ class UtilisateurRepository extends ServiceEntityRepository implements PasswordU
             ->andWhere('u.locked = 0')			// utilisateur
             ->andWhere('u.expired = 0')			// utilisateur non expiré
             ->setParameter('rendezVouses', $rendezVouses)
-            ->setParameter('role', '%"ROLE_MIN_VAL"%')
+            ->setParameter('role', '%"ROLE_PROFESSEUR"%')
             ->getQuery()
             ->getResult();
     }
@@ -101,8 +101,8 @@ class UtilisateurRepository extends ServiceEntityRepository implements PasswordU
             ->getResult();
     }
 
-    // Retourne tous les utilisateurs DGAFP
-    public function findUtilisateursDgafp()
+    // Retourne tous les utilisateurs 
+    public function findUtilisateursPorfs()
     {
         return $this->createQueryBuilder('u')
             ->where('u.roles LIKE :ROLE_PROFESSEUR')
@@ -147,10 +147,10 @@ class UtilisateurRepository extends ServiceEntityRepository implements PasswordU
             ->addSelect('u.enabled')
             ->addSelect('r.rendezVouses ');
         if (!$isAdmin) {
-            $qb = $qb->andwhere('u.roles LIKE :ROLE_PROFESSEUR OR u.roles LIKE :ROLE_MIN')
+            $qb = $qb->andwhere('u.roles LIKE :ROLE_PROFESSEUR OR u.roles LIKE :ROLE_PROFESSEUR')
                 ->andWhere('u.enabled = 1')			// utilisateur actif
                 ->setParameter('ROLE_PROFESSEUR', '%"ROLE_PROFESSEUR"%')
-                ->setParameter('ROLE_MIN', '%"ROLE_MIN"%');
+                ->setParameter('ROLE_PROFESSEUR', '%"ROLE_PROFESSEUR"%');
         }
 
         $qb->andWhere('u.enabled = 1')			// utilisateur actif
