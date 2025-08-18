@@ -30,10 +30,10 @@
 
         <!-- Icon -->
         <link rel="shortcut icon" href="/images/favicon.png">
-
+        
         {% block stylesheets %}{% endblock %}
     </head>
-    <body>
+    <body>      
         <div class="container-fluid">
             <div class="row">
                 <!-- Start Main Sidebar -->
@@ -52,7 +52,7 @@
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#contenu" aria-controls="contenu" aria-expanded="false" aria-label="Toggle navigation">
                             <img id="main-logo" class="d-inline-block align-top mr-1" style="max-width: 40px;" src="/images/favicon.png" alt="SnowTricks">
                             <i class="material-icons">keyboard_arrow_down</i>
-                        </button>
+                        </button>               
                         <div class="collapse navbar-collapse" id="contenu">
                             <ul class="nav flex-column">
                                 <li class="nav-item">
@@ -96,20 +96,20 @@
                                 <li class="nav-item d-lg-none">
                                     <a class="nav-link text-danger" href="{{ path('account_logout') }}">
                                         <i class="material-icons text-danger">&#xE879;</i>
-                                        <span>Déconnexion</span>
+                                        <span>Déconnexion</span> 
                                     </a>
-                                </li>
+                                </li>              
                             </ul>
-                        </div>
+                        </div> 
                     </nav>
                 </aside>
                 <!-- End Main Sidebar -->
-                <div class="main-content col-lg-10 col-md-9 col-sm-12 p-0 offset-lg-2 offset-md-3">
+                <div class="main-content col-lg-10 col-md-9 col-sm-12 p-0 offset-lg-2 offset-md-3">                  
                     <div class="d-none d-md-none d-lg-block main-navbar sticky-top bg-white">
                         <!-- Main Navbar -->
                         <nav class="navbar align-items-stretch navbar-light flex-md-nowrap p-0 border-bottom">
-                            <div class="w-100"></div>
-                            <ul class="navbar-nav border-left flex-row-reverse">
+                            <div class="w-100"></div>                          
+                            <ul class="navbar-nav border-left flex-row-reverse">                              
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle text-nowrap px-3" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                                         <img class="user-avatar rounded-circle mr-2" src="/images/{{ user.u_avatar is defined ? user.u_avatar : app.user.avatar }}" alt="Avatar">
@@ -136,7 +136,7 @@
                         </nav>
                     </div>
                     <!-- End Main Navbar -->
-
+                    
                     <!-- Start Flash message -->
                     {% for message in app.flashes('danger') %}
                     <div class="alert alert-danger alert-dismissible fade show mb-0" role="alert">
@@ -144,7 +144,7 @@
                             <span aria-hidden="true">×</span>
                         </button>
                         <i class="fas fa-times mx-2"></i>
-                        <strong>{{ message }}</strong>
+                        <strong>{{ message }}</strong> 
                     </div>
                     {% endfor %}
                     {% for message in app.flashes('success') %}
@@ -153,12 +153,12 @@
                             <span aria-hidden="true">×</span>
                         </button>
                         <i class="fa fa-check mx-2"></i>
-                        <strong>{{ message }}</strong>
+                        <strong>{{ message }}</strong> 
                     </div>
                     {% endfor %}
                     <!-- End Flash message -->
 
-                    <div class="main-content-container container-fluid px-4">
+                    <div class="main-content-container container-fluid px-4"> 
 
                         <!-- Start Header -->
                         <div class="page-header row py-4">
@@ -168,7 +168,7 @@
                             </div>
                         </div>
                         <!-- End Header -->
-
+                        
                         <!-- Start Body -->
                         <div class="row">
                             {% block body %}
@@ -180,7 +180,7 @@
                         {% block paging %}
                         {% endblock paging %}
                         <!-- End Paging -->
-
+                        
                     </div>
 
                     <!-- Start Footer -->
@@ -213,7 +213,7 @@
                                 </li>
                             {% endif %}
                         </ul>
-                        <span class="copyright ml-lg-auto mr-lg-2 my-auto">Copyright © 2021-22 Célestin BOSONGO</span>
+                        <span class="copyright ml-lg-auto mr-lg-2 my-auto">Copyright © 2018 - Jean Descorps</span>
                     </footer>
                     <!-- End Footer -->
 
@@ -239,6 +239,6 @@
         <!-- Main JS File-->
         <script src="/js/main.js"></script>
 
-        {% block javascripts %}{% endblock %}
+        {% block javascripts %}{% endblock %}    
     </body>
 </html>

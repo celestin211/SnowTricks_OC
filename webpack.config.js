@@ -1,4 +1,4 @@
-const Encore = require('@symfony/webpack-encore');
+var Encore = require('@symfony/webpack-encore');
 
 // Manually configure the runtime environment if not already configured yet by the "encore" command.
 // It's useful when you use tools that rely on webpack.config.js file.
@@ -11,42 +11,34 @@ Encore
     .setOutputPath('public/build/')
     // public path used by the web server to access the output path
     .setPublicPath('/build')
-    // only needed for CDN's or subdirectory deploy
+    // only needed for CDN's or sub-directory deploy
     //.setManifestKeyPrefix('build/')
-
     /*
      * ENTRY CONFIG
+     *
+     * Add 1 entry for each "page" of your app
+     * (including one that's included on every page - e.g. "app")
      *
      * Each entry will result in one JavaScript file (e.g. app.js)
      * and one CSS file (e.g. app.css) if your JavaScript imports CSS.
      */
     .addEntry('app', './assets/app.js')
-    .addEntry('scroll', './assets/js/scroll.js')
-    .addEntry('beforeandafter', './assets/js/beforeandafter.js')
-    .addEntry('main', './assets/js/main.js')
     .addEntry('counter', './assets/js/counter.js')
-    .addEntry('navbar', './assets/js/navbar.js')
-    .addEntry('bootstrap.bundle.min', './assets/js/core/bootstrap.bundle.min.js')
-    .addEntry('bootstrap.min', './assets/js/core/bootstrap.min.js')
-    .addEntry('popper.min', './assets/js/core/popper.min.js')
-    .addEntry('mySwiper', './assets/js/mySwiper.js')
-    .addEntry('corporate-ui-dashboard', './assets/js/corporate-ui-dashboard.js')
-    .addEntry('bootstrap-notify', './assets/js/bootstrap-notify.js')
-    .addEntry('Chart.extension', './assets/js/Chart.extension.js')
-    .addEntry('chartjs.min', './assets/js/chartjs.min.js')
-    .addEntry('perfect-scrollbar.min', './assets/js/perfect-scrollbar.min.js')
-    .addEntry('smooth-scrollbar.min', './assets/js/smooth-scrollbar.min.js')
-    .addEntry('swiper-bundle.min', './assets/js/swiper-bundle.min.js')
+    .addEntry('scroll', './assets/js/scroll.js')
+    .addEntry('main', './assets/js/main.js')
+    .addEntry('beforeandafter', './assets/js/beforeandafter.js')
     .addEntry('responsive', './assets/styles/responsive.css')
-    .addEntry('dashboard', './assets/styles/dashboard.css')
-
+    
+    
+    
+    
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()
-
+    
     // will require an extra script tag for runtime.js
     // but, you probably want this, unless you're building a single-page app
     .enableSingleRuntimeChunk()
-
+    
     /*
      * FEATURE CONFIG
      *
@@ -59,13 +51,8 @@ Encore
     .enableSourceMaps(!Encore.isProduction())
     // enables hashed filenames (e.g. app.abc123.css)
     .enableVersioning(Encore.isProduction())
-
-    // configure Babel
-    // .configureBabel((config) => {
-    //     config.plugins.push('@babel/a-babel-plugin');
-    // })
-
-    // enables and configure @babel/preset-env polyfills
+    
+    // enables @babel/preset-env polyfills
     .configureBabelPresetEnv((config) => {
         config.useBuiltIns = 'usage';
         config.corejs = 3;
@@ -74,30 +61,36 @@ Encore
         from: './assets/images',
         to: 'images/[path][name].[hash:8].[ext]'
     })
-
-
+    
     // enables Sass/SCSS support
     //.enableSassLoader()
-
+    
     // uncomment if you use TypeScript
     //.enableTypeScriptLoader()
-
-    // uncomment if you use React
-    //.enableReactPreset()
-
+    
     // uncomment to get integrity="..." attributes on your script & link tags
     // requires WebpackEncoreBundle 1.4 or higher
     //.enableIntegrityHashes(Encore.isProduction())
-
+    
     // uncomment if you're having problems with a jQuery plugin
-    //.autoProvidejQuery()
+    .autoProvidejQuery()
+
+// uncomment if you use API Platform Admin (composer req api-admin)
+//.enableReactPreset()
+//.addEntry('admin', './assets/js/admin.js')
 ;
-module.exports = {
-    module: {
-        loaders: [
-            { test: /\.css$/, loader: "style-loader!css-loader" },
-            // ...
-        ]
-    }
+
+// module.exports = Encore.getWebpackConfig();
+
+const path = require('path');
+
+let config = Encore.getWebpackConfig();
+
+config.resolve.alias = {
+    // Force all modules to use the same jquery version.
+    // 'jquery': path.join(__dirname, 'node_modules/admin-lte/bower_components/jquery/dist/jquery')
+    'jquery': path.join(__dirname, 'node_modules/jquery/dist/jquery')
 };
 module.exports = Encore.getWebpackConfig();
+
+module.exports = config;

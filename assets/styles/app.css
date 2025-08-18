@@ -1,10 +1,3 @@
-
-.logo-goldy{
-    width: 77px;
-    height: auto;
-    border-radius: 141px;
-}
-
-body{
-    font-family: system-ui!Important;
+body {
+    background-color: lightgray;
 }

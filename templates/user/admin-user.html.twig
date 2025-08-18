@@ -5,7 +5,7 @@
 
 {% block body %}
 <div class="col">
-        <!-- Start Active User Table -->
+        <!-- Start Active User Table -->  
         <div class="row">
             <div class="col">
                 <div class="card card-small mb-4">
@@ -25,13 +25,13 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                {% for user in pagingActive.data %}
+                                {% for user in pagingActive.data %}                                
                                     <tr>
                                         <td>{{ user.id }}</td>
                                         <td>{{ user.username }}</td>
                                         <td>{{ user.email }}</td>
                                         <td>{{ user.website }}</td>
-                                        <td>{{ user.createdAt | date('d/m/Y à H:i') }}) }}</td>
+                                        <td>{{ user.createdAt|format_datetime(locale='fr', pattern='dd MMMM y') }}</td>
                                         <td>
                                             <button type="submit" class="btn btn-white confirm" data-toggle="modal" data-target="#deleteUserModal" data-href="{{ path('admin_user_delete', {'id': user.id}) }}">
                                             <span class="text-danger">
@@ -77,7 +77,7 @@
                                         <td>{{ user.username }}</td>
                                         <td>{{ user.email }}</td>
                                         <td>{{ user.website }}</td>
-                                        <td>{{ user.createdAt | date('d/m/Y à H:i') }}) }}}</td>
+                                        <td>{{ user.createdAt|format_datetime(locale='fr', pattern='dd MMMM y') }}</td>
                                         <td>
                                             <button type="submit" class="btn btn-white confirm inactive" data-toggle="modal" data-target="#deleteUserModal" data-href="{{ path('admin_user_delete', {'id': user.id}) }}">
                                             <span class="text-danger">

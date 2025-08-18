@@ -112,6 +112,9 @@ body {
     -webkit-text-size-adjust:100%;
     -webkit-tap-highlight-color:rgba(0,0,0,0)
 }
+.logo-goldy{
+    width: 93px;
+}
 hr {
     margin:1rem 0;
     color:inherit;
@@ -3130,7 +3133,7 @@ fieldset:disabled .btn {
     background-color:#f5a623;
     border-color:#f5a623
 }
-.btn-danger {
+.btn-danger, #contact_valide {
     color:#fff;
     background-color:#e20000;
     border-color:#e20000
@@ -26879,4 +26882,11 @@ svg.leaflet-image-layer.leaflet-interactive path {
     transition-timing-function:linear;
     transition-delay:0s;
     transform:scale(1)
+}
+.private-form__validation{
+
+    margin: 0px 0px;
+    max-height: 1px;
+    display: block;
+    color: red;
 }

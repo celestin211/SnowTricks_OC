@@ -1,0 +1,81 @@
+<table border="0" cellpadding="0" cellspacing="0" align="center"
+	   bgcolor="#FFFFFF" width="520">
+	<tbody>
+
+	<tr>
+		<td style="color: #cccccc; padding-top: 30px" valign="top">
+			<hr color="#CCCCCC" size="1">
+		</td>
+	</tr>
+
+	<tr>
+		<td	style="padding-top: 20px; font-family: Helvetica Neue, Helvetica, Arial, Verdana, sans-serif; color: #205081; font-size: 20px; line-height: 32px; text-align: center; font-weight: bold"
+			   align="left" valign="top">
+			{% block header %}
+				{# 					<h3>Application {{ app_name }}</h3><br/>#}
+				<a href="{{ absolute_url }}"> <img width=93px; height=100 id="1" src="{{ asset('build/images/thumbnail.3f45ff1a.jpg') }}"></a><br/>
+
+			{% endblock %}
+		</td>
+	</tr>
+	</tr>
+	</tbody>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" align="center"
+	   bgcolor="#FFFFFF" width="520">
+	<tbody>
+	<tr>
+		<td
+				style="padding-top: 10px; font-family: Helvetica, Helvetica neue, Arial, Verdana, sans-serif; color: #333333; font-size: 14px; line-height: 20px; text-align: left; "
+				align="left" valign="top">
+			{% block corpsMessage %}
+			{% endblock %}
+		</td>
+	</tr>
+
+	<tr>
+		<td
+				style="padding-bottom: 30px; padding-top: 10px; font-family: Helvetica, Helvetica neue, Arial, Verdana, sans-serif; color: #333333; font-size: 14px; line-height: 20px; text-align: left; "
+				align="left" valign="top"><br>Cordialement,<br><br>L'équipe {{ app_name }}
+		</td>
+	</tr>
+	</tbody>
+</table>
+
+<table border="0" cellpadding="0" cellspacing="0" align="center"
+	   bgcolor="#ffffff" width="520">
+	<tbody>
+	<tr>
+		<td style="color: #cccccc" valign="top">
+			<hr color="cccccc" size="1">
+		</td>
+	</tr>
+	<tr>
+		<td
+				style="padding-top: 30px; font-family: Helvetica, Helvetica neue, Arial, Verdana, sans-serif; color: #707070; font-size: 12px; line-height: 18px; text-align: center; "
+				align="center" valign="top">Cet e-mail a été envoyé automatiquement afin de vous tenir informé des évolutions des campagnes dans l'application {{ app_name }}. <br>
+
+			{# <a
+				href="http://click.mailer.atlassian.com/?qs=4f32abcf4f7d2e86f484133fbbbe904d38cf7dff5a2504b0c02c5d5a8df9341ee8f3c336ae13410b"
+				style="text-decoration: none; color: #707070" target="_blank">Privacy
+					Policy</a> • <a
+				href="http://click.mailer.atlassian.com/?qs=4f32abcf4f7d2e86c6087cb29c0a295ad58c77413caa50ec6fdd2fb1a4f50af5e67a6eb5073a5462"
+				style="text-decoration: none; color: #707070" target="_blank">Contact
+					us</a> • <a
+				href="http://click.mailer.atlassian.com/?qs=4f32abcf4f7d2e86e13259a9d06bff67b1ae49f9a430d625ab7269c34fecda8f712b86af52337100"
+				style="text-decoration: none; color: #707070" target="_blank">Read
+					our Blog</a> • <a
+				href="http://click.mailer.atlassian.com/?qs=4f32abcf4f7d2e86c48e32693300d7e852b4704fb9eea52e85638fbf6445609ab8950f3847f22006"
+				style="text-decoration: none; color: #707070" target="_blank">Follow
+					on Twitter</a> #}
+
+		</td>
+	</tr>
+	<tr>
+		<td
+				style="padding-top: 10px; font-family: Helvetica, Helvetica neue, Arial, Verdana, sans-serif; color: #707070; font-size: 12px; line-height: 18px; text-align: center; "
+				align="center" valign="top">Copyright © {{ "now"|date("Y") }} Kis Renov • Tous droits réservés.
+		</td>
+	</tr>
+	</tbody>
+</table>
