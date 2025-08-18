@@ -11,8 +11,10 @@ framework:
         handler_id: ~
         cookie_secure: auto
         cookie_samesite: lax
+        storage_factory_id: session.storage.factory.mock_file
 
     #esi: true
     #fragments: true
     php_errors:
         log: true
+
