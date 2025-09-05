@@ -1,7 +1,5 @@
 #BOSONGO CELESTIN
 
-[SnowTricks]
-https://bosongoservices.com/#tricks
 
 Le deploiment de l'application
 
